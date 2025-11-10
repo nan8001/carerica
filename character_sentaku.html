@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>キャラクター選択 - ケアリカ</title>
+    <style>
+        body {
+            font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-color: #a8e4ac;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            text-align: center;
+            padding: 2em;
+        }
+        h1 {
+            color: #4169e1;
+            margin-bottom: 1.5em;
+        }
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2em;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .character-item {
+            background: white;
+            padding: 1.5em;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .character-item:hover {
+            transform: translateY(-5px);
+        }
+        .character-img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 1em;
+        }
+        .character-name {
+            font-size: 1.2em;
+            color: #333;
+            margin: 0 0 1em 0;
+        }
+        .select-button {
+            display: inline-block;
+            padding: 10px 30px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .select-button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1));
+            animation: float-bubble linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+        @keyframes float-bubble {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>キャラクターを選んでください</h1>
+        <div class="character-grid">
+            <div class="character-item">
+                <img src="character_odango.png" alt="おだんご" class="character-img">
+                <p class="character-name">おだんご</p>
+                <a href="#" class="select-button">決定</a>
+            </div>
+            <div class="character-item">
+                <img src="character_rollcake.png" alt="ロールケーキ" class="character-img">
+                <p class="character-name">ロールケーキ</p>
+                <a href="#" class="select-button">決定</a>
+            </div>
+            <div class="character-item">
+                <img src="character_shortcake.png" alt="ショートケーキ" class="character-img">
+                <p class="character-name">ショートケーキ</p>
+                <a href="#" class="select-button">決定</a>
+            </div>
+            <div class="character-item">
+                <img src="character_sweets_youkan.png" alt="ようかん" class="character-img">
+                <p class="character-name">ようかん</p>
+                <a href="#" class="select-button">決定</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            
+            // ランダムなサイズ（20px～60px）
+            const size = Math.random() * 40 + 20;
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            
+            // ランダムな横位置
+            const startPositionLeft = Math.random() * 100;
+            bubble.style.left = `${startPositionLeft}%`;
+            
+            // アニメーション時間（3～8秒）
+            const animationDuration = Math.random() * 5 + 3;
+            bubble.style.animationDuration = `${animationDuration}s`;
+            
+            document.body.appendChild(bubble);
+            
+            // アニメーション終了後に要素を削除
+            bubble.addEventListener('animationend', () => {
+                bubble.remove();
+            });
+        }
+
+        // 定期的にシャボン玉を生成（0.8秒ごと）
+        setInterval(createBubble, 800);
+        
+        // 初期シャボン玉を生成
+        for(let i = 0; i < 5; i++) {
+            createBubble();
+        }
+    </script>
+</body>
+</html>
+
